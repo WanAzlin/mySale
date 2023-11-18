@@ -1,13 +1,45 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import React from 'react';
 
-export default function App() {
-  return (
+
+export default class App extends React.Component{
+  state ={
+    value: 0,
+    total_taps: 0
+  }
+
+incrementValue = () => {
+  this.setState({
+    value: this.state.value + 1,
+    total_taps: this.state.total_taps + 1
+  })
+  console.log("Value: " + (this.state.value +1))
+}
+decrementValue = () => {
+  this.setState({
+    value: this.state.value - 1,
+    total_taps: this.state.total_taps + 1
+  })
+  console.log("Value: " + (this.state.value +1))
+}
+
+
+  render(){
+      return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Text style={{ fontSize: 60, marginBottom: -20}}>{this.state.value}</Text>
+      <Text style={{ fontSize: 12, padding: 20, color: 'grey'}}>{"Total Taps: "+this.state.total_taps}</Text>
       <StatusBar style="auto" />
+      <View style={{flexDirection:'row'}}>
+        <Button onPress={this.decrementValue} title="Decrease"/>
+        <Text> </Text>
+        <Button onPress={this.incrementValue} title="Increase"/>
+      </View>
     </View>
   );
+  }
+
 }
 
 const styles = StyleSheet.create({
